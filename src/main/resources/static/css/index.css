@@ -1,0 +1,70 @@
+.main-container {
+    min-height: calc(100vh - 100px);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:"image-box" "text-box";
+    gap: 30px;
+}
+@media screen and (min-width: 850px) {
+    .main-container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:"image-box text-box";
+    }
+}
+.image-box {
+    grid-area: image-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-box img {
+    max-width: 450px;
+    width: 100%;
+    object-fit: cover;
+}
+.text-box {
+    grid-area: text-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h1{
+    margin-bottom: 30px;
+}
+.card{
+    width: 100%;
+    padding: 40px 20px;
+    background: #1f2833;
+    color: #fff;
+}
+label{
+    display: block;
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+input{
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+}
+button{
+    width: 100%;
+    padding:7px 20px;
+    background: #fc5c7d;
+    color: #fff;
+    border: none;
+}
+button:hover{
+    opacity: 0.8;
+}
+.warning{
+    position: relative;
+    color: #fc5c7d;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}

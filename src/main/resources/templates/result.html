@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/result.css}">
+</head>
+<body>
+<!--========================Navbar===============================-->
+<div th:replace="fragments/navbar.html :: navbar"></div>
+
+<!--====================Main container====================-->
+<div class="main-container container">
+   <div class="card">
+       <img th:src="@{/images/score.svg}" th:alt="Image">
+       <p class="title">Your Score</p>
+
+       <div class="info-section">
+           <div class="info">
+               <p>Participate Name:</p>
+               <p th:text="${result.username}"></p>
+           </div>
+           <div class="info">
+               <p>Total Correct Answer:</p>
+               <p th:text="${result.totalCorrect}"></p>
+           </div>
+           <div class="info">
+               <p>Total False Answer:</p>
+               <p th:text="5  - ${result.totalCorrect}"></p>
+           </div>
+       </div>
+       <div class="btn-group">
+           <button type="button" th:onclick="window.location.href='/score'">View Score Board</button>
+           <button type="button" th:onclick="window.location.href='/'">Back to HomePage</button>
+
+       </div>
+   </div>
+</div>
+
+
+<!--========================Footer===============================-->
+<div th:replace="fragments/footer.html :: footer"></div>
+</body>
+</html>
