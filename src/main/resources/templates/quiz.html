@@ -22,15 +22,15 @@
         <div th:each="ques, i : *{questions}" class="questionBox">
             <p class="question" th:text="${ques.title}"></p>
             <div class="option">
-                <input id="optionA" type="radio" th:field="*{questions[__${i.index}__].choose}" th:value="1">
+                <input id="optionA" type="radio" th:field="*{questions[__${i.index}__].chose}" th:value="1">
                 <label for="optionA" th:text="${ques.optionA}"></label>
             </div>
             <div class="option">
-                <input id="optionB" type="radio" th:field="*{questions[__${i.index}__].choose}" th:value="2">
+                <input id="optionB" type="radio" th:field="*{questions[__${i.index}__].chose}" th:value="2">
                 <label for="optionB" th:text="${ques.optionB}"></label>
             </div>
             <div class="option">
-                <input id="optionC" type="radio" th:field="*{questions[__${i.index}__].choose}" th:value="3">
+                <input id="optionC" type="radio" th:field="*{questions[__${i.index}__].chose}" th:value="3">
                 <label for="optionC" th:text="${ques.optionC}"></label>
             </div>
             <input type="hidden" th:field="*{questions[__${i.index}__].title}" />

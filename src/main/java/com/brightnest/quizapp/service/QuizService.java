@@ -4,6 +4,8 @@ package com.brightnest.quizapp.service;
 import com.brightnest.quizapp.model.Question;
 import com.brightnest.quizapp.model.QuestionForm;
 import com.brightnest.quizapp.model.Result;
+import com.brightnest.quizapp.repository.QuestionRepository;
+import com.brightnest.quizapp.repository.ResultRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,21 +16,25 @@ import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
-public class QuizeService {
+public class QuizService {
 
-    private List<Question> allQuestions;
-    private List<Result> results;
-    private final QuestionInitializer questionInitializer;
+//    private List<Question> allQuestions;
+//    private List<Result> results;
+//    private final QuestionInitializer questionInitializer;
+//
+//    @PostConstruct
+//    public void init(){
+////       allQuestions = questionInitializer.getQuestions();
+//       results = new ArrayList<>();
+//    }
 
-    @PostConstruct
-    public void init(){
-       allQuestions = questionInitializer.getQuestions();
-       results = new ArrayList<>();
-    }
+
+    private final QuestionRepository questionRepository;
+    private final ResultRepository resultRepository;
 
     public QuestionForm getQuestionForm(){
         //get random 5 questions for all questions;
-        List<Question> allQuestionsCopy = new ArrayList<>(allQuestions);
+        List<Question> allQuestionsCopy = new ArrayList<>(questionRepository.findAll());
         List<Question> selectedQuestion = new ArrayList<>();
 
         Random rand = new Random();
@@ -44,21 +50,29 @@ public class QuizeService {
     public int getResult(QuestionForm questionForm){
         int totalCorrect = 0;
         for(Question question : questionForm.getQuestions()){
-            if (question.getAns() == question.getChoose()){
+            if (question.getAns() == question.getChose()){
                 totalCorrect++;
             }
         }
         return totalCorrect;
     }
     public void saveResult(Result result){
-        results.add(result);
+
+        resultRepository.save(result);
     }
 
     public List<Result> getResults() {
-        results.sort((r1,r2) -> {
+        List<Result> allResults = resultRepository.findAll();
+
+        allResults.sort((r1,r2) -> {
             return Integer.compare(r2.getTotalCorrect(),
                     r1.getTotalCorrect());
         });
-        return results;
+        return allResults;
+    }
+    public void updateName(String prevName, String updatedName){
+        Result result = resultRepository.findByUsername(prevName);
+        result.setUsername(updatedName);
+        resultRepository.save(result);
     }
 }

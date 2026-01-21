@@ -26,6 +26,18 @@
 
             <button type="submit">Start Quiz</button>
         </form>
+
+
+        <form class="card" th:action="@{/update-name}" method="POST">
+            <label for="update username">Enter Your User Name</label>
+            <input type="text" id="update username" th:name="username" placeholder="Enter Your Username">
+            <p class="warning" th:if="${warning}" th:text="${warning}"></p>
+
+            <button type="submit">Start Quiz</button>
+        </form>
+
+
+
     </div>
 </div>
 

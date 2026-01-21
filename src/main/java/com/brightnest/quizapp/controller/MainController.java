@@ -2,7 +2,7 @@ package com.brightnest.quizapp.controller;
 
 import com.brightnest.quizapp.model.QuestionForm;
 import com.brightnest.quizapp.model.Result;
-import com.brightnest.quizapp.service.QuizeService;
+import com.brightnest.quizapp.service.QuizService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class MainController {
 
-    private final QuizeService quizeService;
+    private final QuizService quizeService;
 
     @GetMapping("/")
     public String home(){
@@ -48,6 +48,12 @@ public class MainController {
     public String score(Model model){
         model.addAttribute("scores",quizeService.getResults());
         return "scoreboard";
+    }
+
+    @PostMapping("/update-name")
+    public String updateName(Model model, @RequestParam String username){
+        quizeService.updateName("faisal", username);
+        return "redirect:/";
     }
 
 }
